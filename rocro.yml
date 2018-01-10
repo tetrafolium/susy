@@ -1,9 +1,8 @@
 inspecode:
 
   csscomb:          ## for CSS
-  - igore:
-    - sass/**
-    - test/**
+  - input:
+    - docs/**
     auto-fix: true
     thresholds:
       num-issues: 999
@@ -11,9 +10,14 @@ inspecode:
     - sass/**
     auto-fix: true
     thresholds:
+      num-issues: 15
+  - input:
+    - test/css/**
+    auto-fix: true
+    thresholds:
       num-issues: 999
   - input:
-    - test/**
+    - test/scss/**
     auto-fix: true
     thresholds:
       num-issues: 999
