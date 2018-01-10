@@ -1,36 +1,14 @@
 inspecode:
 
   csscomb:          ## for CSS
-  - input:
-    - docs/**
+  #- input:  test/css/ag.css    # timed-out
+  #  auto-fix: true
+  #  thresholds:
+  #    num-issues: 1
+  - ignore: test/css/ag.css
     auto-fix: true
     thresholds:
-      num-issues: 1
-  - input:
-    - sass/**
-    auto-fix: true
-    thresholds:
-      num-issues: 15
-  - input:
-    - test/scss/**
-    auto-fix: true
-    thresholds:
-      num-issues: 17
-  - input:
-    - test/css/ag.css
-    auto-fix: true
-    thresholds:
-      num-issues: 999
-  - input:
-    - test/css/svg.css
-    auto-fix: true
-    thresholds:
-      num-issues: 999
-  - input:
-    - test/css/test.css
-    auto-fix: true
-    thresholds:
-      num-issues: 999
+      num-issues: 35
 
   csslint:          ## for CSS
     thresholds:
