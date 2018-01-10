@@ -435,7 +435,7 @@ Backwards Incompatible:
   + Replaces Susy 1.0 ``space`` function.
 
 - Add comrehensive unit tests, using `True`_.
-- Improve fall-abck handling of ommitted arguments.
+- Improve fall-abck handling of omitted arguments.
 - Add ``container`` function to return a given container's width.
 - Add ``auto`` keyword to override ``$container-width``,
   otherwise respect existing width.

@@ -147,7 +147,7 @@
 
 // Normalize Span
 // --------------
-@include describe('Susy Normalize Span [funtion]') {
+@include describe('Susy Normalize Span [function]') {
   @include it('Keyword span') {
     @include assert-equal(
         susy-normalize-span('all', 1 1 1 1 1 1),
