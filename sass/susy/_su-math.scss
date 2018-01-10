@@ -23,8 +23,6 @@
 /// @ignore _su-calc-sum
 /// @ignore _su-needs-calc-output
 
-
-
 // Su Span
 // -------
 /// Calculates and returns a CSS-ready span width,
@@ -66,40 +64,38 @@
   $spread,
   $container-spread: $spread,
   $location: 1
-)
-{
-    $span: su-valid-span($span);
-    $columns: su-valid-columns($columns);
-    $gutters: su-valid-gutters($gutters);
-    $spread: su-valid-spread($spread);
-    $span-width: _su-sum($span, $gutters, $spread, $validate: false);
+) {
+  $span: su-valid-span($span);
+  $columns: su-valid-columns($columns);
+  $gutters: su-valid-gutters($gutters);
+  $spread: su-valid-spread($spread);
+  $span-width: _su-sum($span, $gutters, $spread, $validate: false);
 
-    @if (type-of($span) == 'number')
-    {
-        $location: su-valid-location($span, $location, $columns);
-        $span: su-slice($span, $columns, $location, $validate: false);
-        @if (not unitless($span))
-        {
-            @return $span;
-        }
+  @if (type-of($span) == 'number') {
+    $location: su-valid-location($span, $location, $columns);
+    $span: su-slice($span, $columns, $location, $validate: false);
+    @if (not unitless($span)) {
+      @return $span;
     }
+  }
 
-    @if _su-needs-calc-output($span, $columns, $gutters, $spread, not 'validate')
-    {
-        @return _su-calc-span($span, $columns, $gutters, $spread, $container-spread, not 'validate');
-    }
+  @if _su-needs-calc-output($span, $columns, $gutters, $spread, not 'validate') {
+    @return _su-calc-span($span, $columns, $gutters, $spread, $container-spread, not 'validate');
+  }
 
-    @if unitless($span-width)
-    {
-        $container-spread: su-valid-spread($container-spread);
-        $container: _su-sum($columns, $gutters, $container-spread, $validate: false);
-        @return percentage($span-width / $container);
-    }
+  @if unitless($span-width) {
+    $container-spread: su-valid-spread($container-spread);
+    $container: _su-sum(
+      $columns,
+      $gutters,
+      $container-spread,
+      $validate: false
+    );
+    @return percentage($span-width / $container);
+  }
 
-    @return $span-width;
+  @return $span-width;
 }
-
-
 
 // Su Gutter
 // ---------
@@ -132,25 +128,19 @@
   $columns,
   $gutters,
   $container-spread
-)
-{
-    $container: _su-sum($columns, $gutters, $container-spread);
-    @if (type-of($gutters) == 'number')
-    {
-        @if ($gutters == 0) or (not unitless($gutters))
-        {
-            @return $gutters;
-        }
+) {
+  $container: _su-sum($columns, $gutters, $container-spread);
+  @if (type-of($gutters) == 'number') {
+    @if ($gutters == 0) or (not unitless($gutters)) {
+      @return $gutters;
     }
+  }
 
-    @if _su-needs-calc-output($gutters, $columns, $gutters, -1, not 'validate')
-    {
-        @return _su-calc-span($gutters, $columns, $gutters, -1, $container-spread, not 'validate');
-    }
-    @return percentage($gutters / $container);
+  @if _su-needs-calc-output($gutters, $columns, $gutters, -1, not 'validate') {
+    @return _su-calc-span($gutters, $columns, $gutters, -1, $container-spread, not 'validate');
+  }
+  @return percentage($gutters / $container);
 }
-
-
 
 // Su Slice
 // --------
@@ -178,32 +168,26 @@
   $columns,
   $location: 1,
   $validate: true
-)
-{
-    $floor: floor($span);
-    $sub-columns: ();
-    @if $validate
-    {
-        $columns: su-valid-columns($columns);
-        $location: su-valid-location($span, $location, $columns);
-    }
+) {
+  $floor: floor($span);
+  $sub-columns: ();
+  @if $validate {
+    $columns: su-valid-columns($columns);
+    $location: su-valid-location($span, $location, $columns);
+  }
 
-    @for $i from $location to ($location + $floor)
-    {
-        $sub-columns: append($sub-columns, nth($columns, $i));
-    }
+  @for $i from $location to ($location + $floor) {
+    $sub-columns: append($sub-columns, nth($columns, $i));
+  }
 
-    @if $floor != $span
-    {
-        $remainder: $span - $floor;
-        $column: $location + $floor;
-        $sub-columns: append($sub-columns, nth($columns, $column) * $remainder);
-    }
+  @if $floor != $span {
+    $remainder: $span - $floor;
+    $column: $location + $floor;
+    $sub-columns: append($sub-columns, nth($columns, $column) * $remainder);
+  }
 
-    @return $sub-columns;
+  @return $sub-columns;
 }
-
-
 
 // Su Sum
 // ------
@@ -229,27 +213,22 @@
   $gutters,
   $spread,
   $validate: true
-)
-{
-    // Calculate column-sum
-    $column-sum: 0;
-    $gutter-sum: (ceil(length($columns)) + $spread) * $gutters;
-    $total: if(($gutter-sum > 0), $column-sum + $gutter-sum, $column-sum);
-    @if $validate
-    {
-        $columns: su-valid-span($columns);
-        $gutters: su-valid-gutters($gutters);
-        $spread: su-valid-spread($spread);
-    }
-    @each $column in $columns
-    {
-        $column-sum: $column-sum + $column;
-    }
+) {
+  // Calculate column-sum
+  $column-sum: 0;
+  $gutter-sum: (ceil(length($columns)) + $spread) * $gutters;
+  $total: if(($gutter-sum > 0), $column-sum + $gutter-sum, $column-sum);
+  @if $validate {
+    $columns: su-valid-span($columns);
+    $gutters: su-valid-gutters($gutters);
+    $spread: su-valid-spread($spread);
+  }
+  @each $column in $columns {
+    $column-sum: $column-sum + $column;
+  }
 
-    @return $total;
+  @return $total;
 }
-
-
 
 // Su Calc
 // -------
@@ -283,48 +262,41 @@
   $spread,
   $container-spread: $spread,
   $validate: true
-)
-{
-    // Span and context
-    $span: _su-calc-sum($span, $gutters, $spread, not 'validate');
-    $context: _su-calc-sum($columns, $gutters, $container-spread, not 'validate');
-    // Fixed and fluid
-    $fixed-span: map-get($span, 'fixed');
-    $fluid-span: map-get($span, 'fluid');
-    $fixed-context: map-get($context, 'fixed');
-    $fluid-context: map-get($context, 'fluid');
-    $calc: '#{$fixed-span}';
-    $fluid-calc: '(100% - #{$fixed-context})';
-    @if $validate
-    {
-        $span: su-valid-span($span);
-        $columns: su-valid-columns($columns);
-        $gutters: su-valid-gutters($gutters);
-        $spread: su-valid-spread($spread);
-        $container-spread: su-valid-spread($container-spread);
-    }
+) {
+  // Span and context
+  $span: _su-calc-sum($span, $gutters, $spread, not 'validate');
+  $context: _su-calc-sum($columns, $gutters, $container-spread, not 'validate');
+  // Fixed and fluid
+  $fixed-span: map-get($span, 'fixed');
+  $fluid-span: map-get($span, 'fluid');
+  $fixed-context: map-get($context, 'fixed');
+  $fluid-context: map-get($context, 'fluid');
+  $calc: '#{$fixed-span}';
+  $fluid-calc: '(100% - #{$fixed-context})';
+  @if $validate {
+    $span: su-valid-span($span);
+    $columns: su-valid-columns($columns);
+    $gutters: su-valid-gutters($gutters);
+    $spread: su-valid-spread($spread);
+    $container-spread: su-valid-spread($container-spread);
+  }
 
-    // Fluid-values
-    @if (not $fluid-span)
-    {
-        $fluid-calc: null;
-    } @else if ($fluid-span != $fluid-context)
-    {
-        $fluid-span: '* #{$fluid-span}';
-        $fluid-context: if($fluid-context, '/ #{$fluid-context}', '');
-        $fluid-calc: '(#{$fluid-calc $fluid-context $fluid-span})';
-    }
+  // Fluid-values
+  @if (not $fluid-span) {
+    $fluid-calc: null;
+  } @else if ($fluid-span != $fluid-context) {
+    $fluid-span: '* #{$fluid-span}';
+    $fluid-context: if($fluid-context, '/ #{$fluid-context}', '');
+    $fluid-calc: '(#{$fluid-calc $fluid-context $fluid-span})';
+  }
 
-    @if $fluid-calc
-    {
-        $calc: if(($calc != ''), '#{$calc} + ', '');
-        $calc: '#{$calc + $fluid-calc}';
-    }
+  @if $fluid-calc {
+    $calc: if(($calc != ''), '#{$calc} + ', '');
+    $calc: '#{$calc + $fluid-calc}';
+  }
 
-    @return calc(#{unquote($calc)});
+  @return calc(#{unquote($calc)});
 }
-
-
 
 // Su Calc-Sum
 // -----------
@@ -352,58 +324,45 @@
   $gutters,
   $spread,
   $validate: true
-)
-{
-    $fluid: 0;
-    $fixed: ();
-    $calc: null;
-    // Gutters
-    $gutters: $gutters * (length($columns) + $spread);
-    // Fluid 0 => null
-    $fluid: if(($fluid == 0), null, $fluid);
-    // Return map
-    $return: (
-    'fixed': $calc,
-    'fluid': $fluid,
-    );
-    @if $validate
-    {
-        $columns: su-valid-span($columns);
-        $gutters: su-valid-gutters($gutters);
-        $spread: su-valid-spread($spread);
-    }
+) {
+  $fluid: 0;
+  $fixed: ();
+  $calc: null;
+  // Gutters
+  $gutters: $gutters * (length($columns) + $spread);
+  // Fluid 0 => null
+  $fluid: if(($fluid == 0), null, $fluid);
+  // Return map
+  $return: ('fixed': $calc, 'fluid': $fluid);
+  @if $validate {
+    $columns: su-valid-span($columns);
+    $gutters: su-valid-gutters($gutters);
+    $spread: su-valid-spread($spread);
+  }
 
-    // Columns
-    @each $col in append($columns, $gutters)
-    {
-        @if unitless($col)
-        {
-            $fluid: $fluid + $col;
-        } @else
-        {
-            $fixed: _su-map-add-units($fixed, $col);
-        }
+  // Columns
+  @each $col in append($columns, $gutters) {
+    @if unitless($col) {
+      $fluid: $fluid + $col;
+    } @else {
+      $fixed: _su-map-add-units($fixed, $col);
     }
+  }
 
-    // Compile Fixed Units
-    @each $unit, $total in $fixed
-    {
-        @if ($total != (0 * $total))
-        {
-            $calc: if($calc, '#{$calc} + #{$total}', '#{$total}');
-        }
+  // Compile Fixed Units
+  @each $unit, $total in $fixed {
+    @if ($total != (0 * $total)) {
+      $calc: if($calc, '#{$calc} + #{$total}', '#{$total}');
     }
+  }
 
-    // Calc null or string
-    @if $calc
-    {
-        $calc: if(str-index($calc, '+'), '(#{$calc})', '#{$calc}');
-    }
+  // Calc null or string
+  @if $calc {
+    $calc: if(str-index($calc, '+'), '(#{$calc})', '#{$calc}');
+  }
 
-    @return $return;
+  @return $return;
 }
-
-
 
 // Needs Calc
 // ----------
@@ -433,26 +392,22 @@
   $gutters,
   $spread,
   $validate: true
-)
-{
-    $has-gutter: if((length($span) > 1) or ($spread >= 0), true, false);
-    $check: if($has-gutter, append($span, $gutters), $span);
-    $safe-span: _su-is-comparable($check...);
-    $safe-fluid: _su-is-comparable($gutters, $columns...);
-    @if $validate
-    {
-        $span: su-valid-span($span);
-        $columns: su-valid-columns($columns);
-        $gutters: su-valid-gutters($gutters);
-    }
+) {
+  $has-gutter: if((length($span) > 1) or ($spread >= 0), true, false);
+  $check: if($has-gutter, append($span, $gutters), $span);
+  $safe-span: _su-is-comparable($check...);
+  $safe-fluid: _su-is-comparable($gutters, $columns...);
+  @if $validate {
+    $span: su-valid-span($span);
+    $columns: su-valid-columns($columns);
+    $gutters: su-valid-gutters($gutters);
+  }
 
-    @if ($safe-span == 'static')
-    {
-        @return false;
-    } @else if (not $safe-span)
-    {
-        @return true;
-    }
+  @if ($safe-span == 'static') {
+    @return false;
+  } @else if (not $safe-span) {
+    @return true;
+  }
 
-    @return not $safe-fluid;
+  @return not $safe-fluid;
 }

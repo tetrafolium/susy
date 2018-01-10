@@ -1,16 +1,13 @@
 // Susy Tests
 // ==========
 
-
 // Override Error Output
 $_susy-error-output-override: true;
-
 
 // Requirements
 @import '../../node_modules/sass-true/sass/true';
 @import '../../sass/susy';
 @import '../../sass/plugins/svg-grid';
-
 
 // Tests
 @import 'susy/utilities';
@@ -22,10 +19,8 @@ $_susy-error-output-override: true;
 @import 'susy/syntax-helpers';
 @import 'susy/unprefix';
 
-
 // Plugins
 @import 'plugins/svg-grid';
-
 
 // Report
 @include report;

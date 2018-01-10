@@ -6,150 +6,125 @@ $colors: (
   'yellow': rgba(#ffb27f, .75),
   'red': rgba(#ff7f7f, .75),
   'pink': rgba(#ff7fbf, .75),
-
   'brand': #ff0080,
-
   'text': #4c4c4c,
   'background': #fff,
   'border': 'text',
   'action': #09c,
-  'focus': 'brand',
+  'focus': 'brand'
 );
 
-@function color($key)
-{
-    @if map-has-key($colors, $key)
-    {
-        $key: map-get($colors, $key);
-        @return color($key);
-    }
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    $key: map-get($colors, $key);
+    @return color($key);
+  }
 
-    @return $key;
+  @return $key;
 }
-
 
 // Shared Utilities
 // ----------------
 
-@mixin clearfix
-{
-    &::after
-    {
-        display: block;
-        clear: both;
+@mixin clearfix {
+  &::after {
+    display: block;
+    clear: both;
 
-        content: ' ';
-    }
+    content: ' ';
+  }
 }
 
 @function half-gutter(
   $context: susy-get('columns'),
   $config: ()
-)
-{
-    @return susy-gutter($context, $config) / 2;
+) {
+  @return susy-gutter($context, $config) / 2;
 }
-
 
 // Base
 // ----
 
-html
-{
-    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
-    monospace, sans-serif;
-    line-height: 1.5;
+html {
+  font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
+    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace,
+    sans-serif;
+  line-height: 1.5;
 
-    color: color('text');
-    background: color('background');
+  color: color('text');
+  background: color('background');
 }
 
 html,
-body
-{
-    max-width: 100%;
-    margin: 0;
+body {
+  max-width: 100%;
+  margin: 0;
 }
 
-*
-{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-[role='banner']
-{
-    text-align: center;
+[role='banner'] {
+  text-align: center;
 }
 
 h1,
 h2,
-h3
-{
-    font-weight: normal;
+h3 {
+  font-weight: normal;
 
-    margin: 0;
+  margin: 0;
 }
 
-h1
-{
-    font-size: 2rem;
-    line-height: 3rem;
+h1 {
+  font-size: 2rem;
+  line-height: 3rem;
 }
 
-h2
-{
-    font-size: 1.5rem;
-    line-height: 2.25rem;
+h2 {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
 }
 
-h3
-{
-    font-size: 1rem;
-    line-height: inherit;
+h3 {
+  font-size: 1rem;
+  line-height: inherit;
 }
-
 
 // Shared Styles
 // -------------
 
-.container
-{
-    max-width: 90%;
-    margin: 3rem auto;
+.container {
+  max-width: 90%;
+  margin: 3rem auto;
 }
 
-.ag-title
-{
-    padding: 0 1.5rem;
+.ag-title {
+  padding: 0 1.5rem;
 
-    color: color('background');
-    background: color('text');
+  color: color('background');
+  background: color('text');
 }
 
-.grid-element
-{
-    padding: .75rem;
+.grid-element {
+  padding: .75rem;
 
-    outline: 1px solid;
+  outline: 1px solid;
 
-    &.size1of5
-    {
-        background: color('blue');
-    }
+  &.size1of5 {
+    background: color('blue');
+  }
 
-    &.size1of2
-    {
-        background: color('red');
-    }
+  &.size1of2 {
+    background: color('red');
+  }
 
-    &.size1of3
-    {
-        background: color('yellow');
-    }
+  &.size1of3 {
+    background: color('yellow');
+  }
 
-    &.full
-    {
-        background: color('pink');
-    }
+  &.full {
+    background: color('pink');
+  }
 }

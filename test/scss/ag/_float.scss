@@ -1,115 +1,91 @@
 // Float
 // =====
 
-
-
 // Asymmetrical, Before
 // --------------------
 
-$susy: (
-  'columns': (1 2 1 1 3 1 3 2 1 4),
-  'gutters': .5,
-);
+$susy: ('columns': (1 2 1 1 3 1 3 2 1 4), 'gutters': .5);
 
-.float-asym-before
-{
-    .ag
-    {
-        background: susy-svg-grid() no-repeat scroll;
+.float-asym-before {
+  .ag {
+    background: susy-svg-grid() no-repeat scroll;
 
-        @include clearfix;
+    @include clearfix;
+  }
+
+  .grid-element {
+    float: left;
+
+    margin-left: susy-gutter();
+
+    &:first-child,
+    &.full {
+      // sass-lint:disable no-important
+      margin-left: 0 !important;
+      // sass-lint:enable no-important
+    }
+  }
+
+  .full {
+    width: 100%;
+
+    @include clearfix;
+  }
+
+  .size1of5 {
+    width: susy-span('first' 2);
+    padding-bottom: 6.75rem;
+
+    + .size1of5 {
+      float: right;
+
+      width: susy-span(last 2);
+    }
+  }
+
+  .size3of5 {
+    float: left;
+
+    width: susy-span(6 at 3);
+    margin-left: susy-gutter();
+
+    > .size1of2 {
+      &:first-child {
+        width: susy-span('first' 3 of susy-slice(6 at 3));
+      }
+
+      + .size1of2 {
+        width: susy-span('last' 3 of susy-slice(6 at 3));
+        margin-left: susy-gutter(susy-slice(6 at 3));
+      }
+    }
+  }
+
+  .size1of3 {
+    width: susy-span('first' 2 of susy-slice(6 at 3));
+    padding-bottom: 3.75rem;
+  }
+
+  .size2of3 {
+    float: right;
+
+    width: susy-span('last' 4 of susy-slice(6 at 3));
+
+    .grid-element {
+      margin-left: susy-gutter(susy-slice(4 at 5));
     }
 
-    .grid-element
-    {
-        float: left;
+    .size1of2 {
+      &:first-child {
+        width: susy-span('first' 2 of susy-slice(4 at 5));
+      }
 
-        margin-left: susy-gutter();
-
-        &:first-child,
-        &.full
-        {
-            // sass-lint:disable no-important
-            margin-left: 0 !important;
-            // sass-lint:enable no-important
-        }
+      + .size1of2 {
+        width: susy-span('last' 2 of susy-slice(4 at 5));
+      }
     }
-
-    .full
-    {
-        width: 100%;
-
-        @include clearfix;
-    }
-
-    .size1of5
-    {
-        width: susy-span('first' 2);
-        padding-bottom: 6.75rem;
-
-         + .size1of5
-        {
-            float: right;
-
-            width: susy-span(last 2);
-        }
-    }
-
-    .size3of5
-    {
-        float: left;
-
-        width: susy-span(6 at 3);
-        margin-left: susy-gutter();
-
-         > .size1of2
-        {
-            &:first-child
-            {
-                width: susy-span('first' 3 of susy-slice(6 at 3));
-            }
-
-             + .size1of2
-            {
-                width: susy-span('last' 3 of susy-slice(6 at 3));
-                margin-left: susy-gutter(susy-slice(6 at 3));
-            }
-        }
-    }
-
-    .size1of3
-    {
-        width: susy-span('first' 2 of susy-slice(6 at 3));
-        padding-bottom: 3.75rem;
-    }
-
-    .size2of3
-    {
-        float: right;
-
-        width: susy-span('last' 4 of susy-slice(6 at 3));
-
-        .grid-element
-        {
-            margin-left: susy-gutter(susy-slice(4 at 5));
-        }
-
-        .size1of2
-        {
-            &:first-child
-            {
-                width: susy-span('first' 2 of susy-slice(4 at 5));
-            }
-
-             + .size1of2
-            {
-                width: susy-span('last' 2 of susy-slice(4 at 5));
-            }
-        }
-    }
+  }
 }
-
-
 
 // Fixed, Inside
 // -------------
@@ -118,78 +94,66 @@ $susy: (
   'columns': susy-repeat(10, 5em),
   'gutters': .5em,
   'spread': 'wide',
-  'container-spread': 'wide',
+  'container-spread': 'wide'
 );
 
-.float-static-inside
-{
-    width: span('all');
-    max-width: span('all');
+.float-static-inside {
+  width: span('all');
+  max-width: span('all');
 
-    .ag
-    {
-        background: susy-svg-grid() no-repeat scroll;
+  .ag {
+    background: susy-svg-grid() no-repeat scroll;
 
-        @include clearfix;
+    @include clearfix;
+  }
+
+  .grid-element {
+    float: left;
+
+    padding-right: half-gutter();
+    padding-left: half-gutter();
+  }
+
+  .full {
+    width: 100%;
+
+    @include clearfix;
+  }
+
+  .size1of5 {
+    width: susy-span(2);
+    padding-bottom: 6.75rem;
+
+    + .size1of5 {
+      float: right;
     }
+  }
 
-    .grid-element
-    {
-        float: left;
+  .size3of5 {
+    float: left;
 
-        padding-right: half-gutter();
-        padding-left: half-gutter();
+    width: susy-span(6);
+
+    > .size1of2 {
+      width: susy-span(3 of 6);
     }
+  }
 
-    .full
-    {
-        width: 100%;
+  .size1of3 {
+    width: susy-span(2 of 6);
+    padding-bottom: 3.75rem;
+  }
 
-        @include clearfix;
+  .size2of3 {
+    float: right;
+
+    width: susy-span(4 of 6);
+
+    .size1of2 {
+      width: susy-span(2 of 4);
     }
-
-    .size1of5
-    {
-        width: susy-span(2);
-        padding-bottom: 6.75rem;
-
-         + .size1of5
-        {
-            float: right;
-        }
-    }
-
-    .size3of5
-    {
-        float: left;
-
-        width: susy-span(6);
-
-         > .size1of2
-        {
-            width: susy-span(3 of 6);
-        }
-    }
-
-    .size1of3
-    {
-        width: susy-span(2 of 6);
-        padding-bottom: 3.75rem;
-    }
-
-    .size2of3
-    {
-        float: right;
-
-        width: susy-span(4 of 6);
-
-        .size1of2
-        {
-            width: susy-span(2 of 4);
-        }
-    }
+  }
 }
-
 
 // Inside-Static
 // -------------
@@ -198,73 +162,62 @@ $susy: (
   'columns': susy-repeat(10),
   'gutters': .5em,
   'spread': 'wide',
-  'container-spread': 'wide',
+  'container-spread': 'wide'
 );
 
-.float-inside-static
-{
-    max-width: 90%;
+.float-inside-static {
+  max-width: 90%;
 
-    .ag
-    {
-        background: susy-svg-grid() no-repeat scroll;
+  .ag {
+    background: susy-svg-grid() no-repeat scroll;
 
-        @include clearfix;
+    @include clearfix;
+  }
+
+  .grid-element {
+    float: left;
+
+    padding-right: half-gutter();
+    padding-left: half-gutter();
+  }
+
+  .full {
+    width: 100%;
+
+    @include clearfix;
+  }
+
+  .size1of5 {
+    width: susy-span(2);
+    padding-bottom: 6.75rem;
+
+    + .size1of5 {
+      float: right;
     }
+  }
 
-    .grid-element
-    {
-        float: left;
+  .size3of5 {
+    float: left;
 
-        padding-right: half-gutter();
-        padding-left: half-gutter();
+    width: susy-span(6);
+
+    > .size1of2 {
+      width: susy-span(3 of 6);
     }
+  }
 
-    .full
-    {
-        width: 100%;
+  .size1of3 {
+    width: susy-span(2 of 6);
+    padding-bottom: 3.75rem;
+  }
 
-        @include clearfix;
+  .size2of3 {
+    float: right;
+
+    width: susy-span(4 of 6);
+
+    .size1of2 {
+      width: susy-span(2 of 4);
     }
-
-    .size1of5
-    {
-        width: susy-span(2);
-        padding-bottom: 6.75rem;
-
-         + .size1of5
-        {
-            float: right;
-        }
-    }
-
-    .size3of5
-    {
-        float: left;
-
-        width: susy-span(6);
-
-         > .size1of2
-        {
-            width: susy-span(3 of 6);
-        }
-    }
-
-    .size1of3
-    {
-        width: susy-span(2 of 6);
-        padding-bottom: 3.75rem;
-    }
-
-    .size2of3
-    {
-        float: right;
-
-        width: susy-span(4 of 6);
-
-        .size1of2
-        {
-            width: susy-span(2 of 4);
-        }
-    }
+  }
 }

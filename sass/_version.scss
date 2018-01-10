@@ -1,7 +1,6 @@
 // Release Management in Susy
 // ==========================
 
-
 // Susy Version [variable]
 // -----------------------
 /// The current version of Susy being used.
@@ -16,12 +15,7 @@
 /// @prop {integer} 'major' - the major release number
 /// @prop {integer} 'minor' - the minor release number
 /// @prop {integer} 'patch' - the patch number
-$_susy-version: (
-  'major': 3,
-  'minor': 0,
-  'patch': 1,
-);
-
+$_susy-version: ('major': 3, 'minor': 0, 'patch': 1);
 
 // Susy Version [function]
 // -----------------------
@@ -43,16 +37,14 @@ $_susy-version: (
 ///   /* Major Release: #{susy-version('major')} */
 @function susy-version(
   $part: null
-)
-{
-    $major: map-get($_susy-version, 'major');
-    $minor: map-get($_susy-version, 'minor');
-    $patch: map-get($_susy-version, 'patch');
-    $full: '#{$major}.#{$minor}.#{$patch}';
+) {
+  $major: map-get($_susy-version, 'major');
+  $minor: map-get($_susy-version, 'minor');
+  $patch: map-get($_susy-version, 'patch');
+  $full: '#{$major}.#{$minor}.#{$patch}';
 
-    @return map-get($_susy-version, $part) or $full;
+  @return map-get($_susy-version, $part) or $full;
 }
-
 
 /// # Release Notes for Susy v3.0.0 (and 3.0.1)
 ///

@@ -1,11 +1,9 @@
 // Functional AG Tests
 // ===================
 
-
 // Requirements
 @import '../../sass/susy';
 @import '../../sass/plugins/svg-grid';
-
 
 // Layouts
 $spread: 'narrow', 'wide', 'wider';
@@ -14,62 +12,47 @@ $columns: (
   'static' : susy-repeat(6, 4em),
   'calc' : susy-repeat(3, 1 4em)
 );
-$gutters: (
-  'fluid' : .25,
-  'static' : 1em,
-  'calc' : 5mm
-);
-
+$gutters: ('fluid' : .25, 'static' : 1em, 'calc' : 5mm);
 
 // All the options!
-@each $container in $spread
-{
-    [data-container='#{$container}']
-    {
-        @each $span in $spread
-        {
-            &[data-span='#{$span}']
-            {
-                @each $col-name, $column in $columns
-                {
-                    &[data-column='#{$col-name}']
-                    {
-                        @each $gut-name, $gutter in $gutters
-                        {
-                            &[data-gutter='#{$gut-name}']
-                            {
-                                width: span('all' $container of $container, $grid);
+@each $container in $spread {
+  [data-container='#{$container}'] {
+    @each $span in $spread {
+      &[data-span='#{$span}'] {
+        @each $col-name, $column in $columns {
+          &[data-column='#{$col-name}'] {
+            @each $gut-name, $gutter in $gutters {
+              &[data-gutter='#{$gut-name}'] {
+                width: span('all' $container of $container, $grid);
 
-                                background: susy-svg-grid($grid) no-repeat scroll;
+                background: susy-svg-grid($grid) no-repeat scroll;
 
-                                $grid: (
-                                'columns': $column,
-                                'gutters': $gutter,
-                                'spread': $span,
-                                'container-spread': $container,
-                                );
-                            }
-                        }
-                    }
-                }
+                $grid: (
+                  'columns': $column,
+                  'gutters': $gutter,
+                  'spread': $span,
+                  'container-spread': $container
+                );
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
-
 // Styles
-[data-container]
-{
-    margin: 2rem auto;
-    padding: 3rem 0;
+[data-container] {
+  margin: 2rem auto;
+  padding: 3rem 0;
 
-    text-align: center;
+  text-align: center;
 
-    outline: 1px solid;
+  outline: 1px solid;
 
-    &::before
-    {
-        content: attr(data-container) ', ' attr(data-span) ', ' attr(data-column) ', ' attr(data-gutter);
-    }
+  &::before {
+    content: attr(data-container) ', ' attr(data-span) ', ' attr(data-column)
+      ', ' attr(data-gutter);
+  }
 }

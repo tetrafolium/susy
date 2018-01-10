@@ -3,16 +3,12 @@
 // - Susy Error Output Override [variable]
 // - Susy Error [function]
 
-
-
 // Susy Error Output Override
 // --------------------------
 /// Turn off error output for testing
 /// @group x-utility
 /// @access private
 $_susy-error-output-override: false !default;
-
-
 
 // Susy Error
 // ----------
@@ -35,16 +31,13 @@ $_susy-error-output-override: false !default;
   $message,
   $source,
   $override: $_susy-error-output-override
-)
-{
-    @if $override
-    {
-        @return 'ERROR [#{$source}] #{$message}';
-    }
+) {
+  @if $override {
+    @return 'ERROR [#{$source}] #{$message}';
+  }
 
-    @error '[#{$source}] #{$message}';
+  @error '[#{$source}] #{$message}';
 }
-
 
 // Su Is Comparable
 // ----------------
@@ -62,31 +55,26 @@ $_susy-error-output-override: false !default;
 ///   or `false` for mismatched units
 @function _su-is-comparable(
   $lengths...
-)
-{
-    $first: nth($lengths, 1);
+) {
+  $first: nth($lengths, 1);
 
-    @if (length($lengths) == 1)
-    {
-        @return if(unitless($first), 'fluid', 'static');
-    }
-
-    @for $i from 2 through length($lengths)
-    {
-        $comp: nth($lengths, $i);
-        $fail: not comparable($first, $comp);
-        $fail: $fail or (unitless($first) and not unitless($comp));
-        $fail: $fail or (unitless($comp) and not unitless($first));
-
-        @if $fail
-        {
-            @return false;
-        }
-    }
-
+  @if (length($lengths) == 1) {
     @return if(unitless($first), 'fluid', 'static');
-}
+  }
 
+  @for $i from 2 through length($lengths) {
+    $comp: nth($lengths, $i);
+    $fail: not comparable($first, $comp);
+    $fail: $fail or (unitless($first) and not unitless($comp));
+    $fail: $fail or (unitless($comp) and not unitless($first));
+
+    @if $fail {
+      @return false;
+    }
+  }
+
+  @return if(unitless($first), 'fluid', 'static');
+}
 
 // Su Map Add Units
 // ----------------
@@ -116,24 +104,20 @@ $_susy-error-output-override: false !default;
 @function _su-map-add-units(
   $map,
   $value
-)
-{
-    $unit: $value * 0;
-    $has: map-get($map, $unit) or 0;
+) {
+  $unit: $value * 0;
+  $has: map-get($map, $unit) or 0;
 
-    @if ($has == 0)
-    {
-        @each $try, $could in $map
-        {
-            $match: comparable($try, $value);
-            $unit: if($match, $try, $unit);
-            $has: if($match, $could, $has);
-        }
+  @if ($has == 0) {
+    @each $try, $could in $map {
+      $match: comparable($try, $value);
+      $unit: if($match, $try, $unit);
+      $has: if($match, $could, $has);
     }
+  }
 
-    @return map-merge($map, ($unit: $has + $value));
+  @return map-merge($map, ($unit: $has + $value));
 }
-
 
 // Susy Flatten
 // ------------
@@ -152,29 +136,24 @@ $_susy-error-output-override: false !default;
 ///   /* #{_susy-flatten($list)} */
 @function _susy-flatten(
   $list
-)
-{
-    $flat: ();
+) {
+  $flat: ();
 
-    // Don't iterate over maps
-    @if (type-of($list) == 'map')
-    {
-        @return $list;
+  // Don't iterate over maps
+  @if (type-of($list) == 'map') {
+    @return $list;
+  }
+
+  // Iterate over lists (or single items)
+  @each $item in $list {
+    @if (type-of($item) == 'list') {
+      $item: _susy-flatten($item);
+      $flat: join($flat, $item);
+    } @else {
+      $flat: append($flat, $item);
     }
+  }
 
-    // Iterate over lists (or single items)
-    @each $item in $list
-    {
-        @if (type-of($item) == 'list')
-        {
-            $item: _susy-flatten($item);
-            $flat: join($flat, $item);
-        } @else
-        {
-            $flat: append($flat, $item);
-        }
-    }
-
-    // Return flattened list
-    @return $flat;
+  // Return flattened list
+  @return $flat;
 }
