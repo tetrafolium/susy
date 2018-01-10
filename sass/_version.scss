@@ -43,13 +43,14 @@ $_susy-version: (
 ///   /* Major Release: #{susy-version('major')} */
 @function susy-version(
   $part: null
-) {
-  $major: map-get($_susy-version, 'major');
-  $minor: map-get($_susy-version, 'minor');
-  $patch: map-get($_susy-version, 'patch');
-  $full: '#{$major}.#{$minor}.#{$patch}';
+)
+{
+    $major: map-get($_susy-version, 'major');
+    $minor: map-get($_susy-version, 'minor');
+    $patch: map-get($_susy-version, 'patch');
+    $full: '#{$major}.#{$minor}.#{$patch}';
 
-  @return map-get($_susy-version, $part) or $full;
+    @return map-get($_susy-version, $part) or $full;
 }
 
 

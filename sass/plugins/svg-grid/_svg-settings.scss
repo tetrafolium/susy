@@ -10,5 +10,5 @@
 /// or any other grid settings map.
 /// @group plugin_svg-grid
 $_susy-defaults: map-merge((
-    'svg-grid-colors': hsla(120, 50%, 50%, 0.5) hsla(120, 50%, 75%, 0.5),
+    'svg-grid-colors': hsla(120, 50%, 50%, .5) hsla(120, 50%, 75%, .5),
   ), $_susy-defaults);

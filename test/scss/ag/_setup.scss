@@ -2,10 +2,10 @@
 // ------
 
 $colors: (
-  'blue': rgba(#7fdfff, 0.75),
-  'yellow': rgba(#ffb27f, 0.75),
-  'red': rgba(#ff7f7f, 0.75),
-  'pink': rgba(#ff7fbf, 0.75),
+  'blue': rgba(#7fdfff, .75),
+  'yellow': rgba(#ffb27f, .75),
+  'red': rgba(#ff7f7f, .75),
+  'pink': rgba(#ff7fbf, .75),
 
   'brand': #ff0080,
 
@@ -16,115 +16,140 @@ $colors: (
   'focus': 'brand',
 );
 
-@function color($key) {
-  @if map-has-key($colors, $key) {
-    $key: map-get($colors, $key);
-    @return color($key);
-  }
+@function color($key)
+{
+    @if map-has-key($colors, $key)
+    {
+        $key: map-get($colors, $key);
+        @return color($key);
+    }
 
-  @return $key;
+    @return $key;
 }
 
 
 // Shared Utilities
 // ----------------
 
-@mixin clearfix {
-  &::after {
-    clear: both;
-    content: ' ';
-    display: block;
-  }
+@mixin clearfix
+{
+    &::after
+    {
+        display: block;
+        clear: both;
+
+        content: ' ';
+    }
 }
 
 @function half-gutter(
   $context: susy-get('columns'),
   $config: ()
-) {
-  @return susy-gutter($context, $config) / 2;
+)
+{
+    @return susy-gutter($context, $config) / 2;
 }
 
 
 // Base
 // ----
 
-html {
-  background: color('background');
-  color: color('text');
-  font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-  'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
-  monospace, sans-serif;
-  line-height: 1.5;
+html
+{
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
+    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
+    monospace, sans-serif;
+    line-height: 1.5;
+
+    color: color('text');
+    background: color('background');
 }
 
 html,
-body {
-  margin: 0;
-  max-width: 100%;
+body
+{
+    max-width: 100%;
+    margin: 0;
 }
 
-* {
-  box-sizing: border-box;
+*
+{
+    box-sizing: border-box;
 }
 
-[role='banner'] {
-  text-align: center;
+[role='banner']
+{
+    text-align: center;
 }
 
 h1,
 h2,
-h3 {
-  font-weight: normal;
-  margin: 0;
+h3
+{
+    font-weight: normal;
+
+    margin: 0;
 }
 
-h1 {
-  font-size: 2rem;
-  line-height: 3rem;
+h1
+{
+    font-size: 2rem;
+    line-height: 3rem;
 }
 
-h2 {
-  font-size: 1.5rem;
-  line-height: 2.25rem;
+h2
+{
+    font-size: 1.5rem;
+    line-height: 2.25rem;
 }
 
-h3 {
-  font-size: 1rem;
-  line-height: inherit;
+h3
+{
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 
 // Shared Styles
 // -------------
 
-.container {
-  margin: 3rem auto;
-  max-width: 90%;
+.container
+{
+    max-width: 90%;
+    margin: 3rem auto;
 }
 
-.ag-title {
-  background: color('text');
-  color: color('background');
-  padding: 0 1.5rem;
+.ag-title
+{
+    padding: 0 1.5rem;
+
+    color: color('background');
+    background: color('text');
 }
 
-.grid-element {
-  outline: 1px solid;
-  padding: 0.75rem;
+.grid-element
+{
+    padding: .75rem;
 
-  &.size1of5 {
-    background: color('blue');
-  }
+    outline: 1px solid;
 
-  &.size1of2 {
-    background: color('red');
-  }
+    &.size1of5
+    {
+        background: color('blue');
+    }
 
-  &.size1of3 {
-    background: color('yellow');
-  }
+    &.size1of2
+    {
+        background: color('red');
+    }
 
-  &.full {
-    background: color('pink');
-  }
+    &.size1of3
+    {
+        background: color('yellow');
+    }
+
+    &.full
+    {
+        background: color('pink');
+    }
 }

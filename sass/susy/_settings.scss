@@ -215,14 +215,16 @@ $susy: () !default;
 @function susy-repeat(
   $count,
   $value: 1
-) {
-  $return: ();
+)
+{
+    $return: ();
 
-  @for $i from 1 through $count {
-    $return: join($return, $value);
-  }
+    @for $i from 1 through $count
+    {
+        $return: join($return, $value);
+    }
 
-  @return $return;
+    @return $return;
 }
 
 
@@ -244,7 +246,7 @@ $susy: () !default;
 /// @prop {string} container-spread ['narrow']
 $_susy-defaults: (
   'columns': susy-repeat(4),
-  'gutters': 0.25,
+  'gutters': .25,
   'spread': 'narrow',
   'container-spread': 'narrow',
 );
@@ -285,14 +287,16 @@ $_susy-defaults: (
 ///   }
 @function susy-settings(
   $overrides...
-) {
-  $settings: map-merge($_susy-defaults, $susy);
+)
+{
+    $settings: map-merge($_susy-defaults, $susy);
 
-  @each $config in $overrides {
-    $settings: map-merge($settings, $config);
-  }
+    @each $config in $overrides
+    {
+        $settings: map-merge($settings, $config);
+    }
 
-  @return $settings;
+    @return $settings;
 }
 
 
@@ -316,14 +320,16 @@ $_susy-defaults: (
 ///   /* gutters: #{susy-get('gutters')} */
 @function susy-get(
   $key
-) {
-  $settings: susy-settings();
+)
+{
+    $settings: susy-settings();
 
-  @if not map-has-key($settings, $key) {
-    @return _susy-error(
-      'There is no Susy setting called `#{$key}`',
-      'susy-get');
-  }
+    @if not map-has-key($settings, $key)
+    {
+        @return _susy-error(
+        'There is no Susy setting called `#{$key}`',
+        'susy-get');
+    }
 
-  @return map-get($settings, $key);
+    @return map-get($settings, $key);
 }

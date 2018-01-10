@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 /* # Module: Susy Error [function] */
 /* ------------------------------- */
 /* Test: Allow errors to return without blocking compilation */

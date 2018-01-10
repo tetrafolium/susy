@@ -4,12 +4,12 @@
 
 // SVG Grid [function]
 // -------------------
-@include describe('SVG Grid (unprefixed) [function]') {
-
-  @include it('Pass settings through') {
-    @include assert-equal(
-      svg-grid(2, #9cc, 1em),
-      susy-svg-grid(2, #9cc, 1em));
-  }
-
+@include describe('SVG Grid (unprefixed) [function]')
+{
+    @include it('Pass settings through')
+    {
+        @include assert-equal(
+        svg-grid(2, #9cc, 1em),
+        susy-svg-grid(2, #9cc, 1em));
+    }
 }

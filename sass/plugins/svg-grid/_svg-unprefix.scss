@@ -13,6 +13,7 @@
   $grid: $susy,
   $colors: susy-get('svg-grid-colors'),
   $offset: null
-) {
-  @return susy-svg-grid($grid, $colors, $offset);
+)
+{
+    @return susy-svg-grid($grid, $colors, $offset);
 }

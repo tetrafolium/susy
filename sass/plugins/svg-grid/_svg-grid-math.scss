@@ -21,14 +21,16 @@
 @function _susy-svg-column-position(
   $column,
   $grid
-) {
-  $x: $column - 1;
+)
+{
+    $x: $column - 1;
 
-  @if ($x > 0) {
-    $x: susy-span(first $x wide, $grid);
-  }
+    @if ($x > 0)
+    {
+        $x: susy-span(first $x wide, $grid);
+    }
 
-  @return $x;
+    @return $x;
 }
 
 
@@ -48,20 +50,22 @@
 ///   based on spread values and gutter-widths
 @function _susy-svg-offset(
   $grid
-) {
-  $columns: su-valid-columns(map-get($grid, 'columns'));
-  $gutters: su-valid-gutters(map-get($grid, 'gutters'));
-  $container: su-valid-spread(map-get($grid, 'container-spread')) + 1;
+)
+{
+    $columns: su-valid-columns(map-get($grid, 'columns'));
+    $gutters: su-valid-gutters(map-get($grid, 'gutters'));
+    $container: su-valid-spread(map-get($grid, 'container-spread')) + 1;
+    $gutter: su-call('su-gutter', $grid);
 
-  @if ($container == 0) {
-    @return null;
-  }
+    @if ($container == 0)
+    {
+        @return null;
+    }
 
-  $gutter: su-call('su-gutter', $grid);
+    @if (type-of($gutter) == 'string')
+    {
+        @return 'calc(#{$container} * #{$gutter} / 2)';
+    }
 
-  @if (type-of($gutter) == 'string') {
-    @return 'calc(#{$container} * #{$gutter} / 2)';
-  }
-
-  @return $container * $gutter / 2;
+    @return $container * $gutter / 2;
 }

@@ -139,15 +139,16 @@
 @function susy-span(
   $span,
   $config: ()
-) {
-  $output: susy-compile($span, $config);
+)
+{
+    $output: susy-compile($span, $config);
+    $actual: '[#{type-of($span)}] `#{inspect($span)}`';
 
-  @if map-get($output, 'span') {
-    @return su-call('su-span', $output);
-  }
-
-  $actual: '[#{type-of($span)}] `#{inspect($span)}`';
-  @return _susy-error(
+    @if map-get($output, 'span')
+    {
+        @return su-call('su-span', $output);
+    }
+    @return _susy-error(
     'Unable to determine span value from #{$actual}.',
     'susy-span');
 }
@@ -199,10 +200,11 @@
 @function susy-gutter(
   $context: susy-get('columns'),
   $config: ()
-) {
-  $context: susy-compile($context, $config, 'context-only');
+)
+{
+    $context: susy-compile($context, $config, 'context-only');
 
-  @return su-call('su-gutter', $context);
+    @return su-call('su-gutter', $context);
 }
 
 
@@ -249,10 +251,11 @@
 @function susy-slice(
   $span,
   $config: ()
-) {
-  $span: susy-compile($span, $config);
+)
+{
+    $span: susy-compile($span, $config);
 
-  @return su-call('su-slice', $span);
+    @return su-call('su-slice', $span);
 }
 
 
