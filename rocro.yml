@@ -5,19 +5,29 @@ inspecode:
     - docs/**
     auto-fix: true
     thresholds:
-      num-issues: 999
+      num-issues: 1
   - input:
     - sass/**
     auto-fix: true
     thresholds:
       num-issues: 15
   - input:
-    - test/css/**
+    - test/scss/**
+    auto-fix: true
+    thresholds:
+      num-issues: 17
+  - input:
+    - test/css/ag.css
     auto-fix: true
     thresholds:
       num-issues: 999
   - input:
-    - test/scss/**
+    - test/css/svg.css
+    auto-fix: true
+    thresholds:
+      num-issues: 999
+  - input:
+    - test/css/test.css
     auto-fix: true
     thresholds:
       num-issues: 999
